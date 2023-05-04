@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const fs = require('fs');
 const dotenv = require('dotenv');
-const AppError = require('./utils/appError');
+// const AppError = require('./utils/appError');
 const globalErrorHandler =  require('./controllers/errorController')
 
 dotenv.config({ path: './.env' })
