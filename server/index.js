@@ -75,7 +75,7 @@ const  userRouter = require('./routes/userRoute');
 // const  cartRouter =  require('./routes/cartItemRoute');
 // const orderRouter =  require('./routes/orderRoute')
 
-app.use('/api/v1/user', userRouter);
+app.use('/api/nhif/v1/user', userRouter);
 // app.use('/api/v1/products', productRouter);
 // app.use('/api/v1/bakeries',bakeryRouter )
 // // app.use('/api/v1/posts',fileUploadRouter );
