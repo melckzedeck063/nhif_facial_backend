@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 const AppError = require('./utils/appError');
 const globalErrorHandler =  require('./controllers/errorController')
 
-dotenv.config({ path: './config.env' })
+dotenv.config({ path: './.env' })
 
 // const multer = require('multer');
 // // const upload = multer({ dest: 'uploads/posts' });

@@ -2,10 +2,10 @@
   "name": "nhif_facial_recognition_server",
   "version": "1.0.0",
   "description": "",
-  "main": "server/server.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server" : "nodemon server/server.js"
+    "server" : "nodemon server/index.js"
   },
   "author": "melckzedeck james",
   "license": "ISC",
