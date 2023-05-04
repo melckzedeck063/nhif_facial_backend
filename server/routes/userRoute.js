@@ -7,10 +7,10 @@ const  userController =  require('../controllers/userController');
 
 router.post('/signup', authController.signUp);
 router.post('/login', authController.Login);
-
-router.use(authController.protect);
-
 router.get('/all_users', userController.getAllUsers);
+
+// router.use(authController.protect);
+
 router.get('/all_staffs', userController.getAllStaffs);
 router.get('/me', userController.getMe);
 router.get('/user/:id', userController.getUser);
