@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const fs = require('fs');
 const dotenv = require('dotenv');
-// const AppError = require('./utils/appError');
+
 const globalErrorHandler =  require('./controllers/errorController')
 
 dotenv.config({ path: './.env' })
@@ -75,7 +75,7 @@ const  userRouter = require('./routes/userRoute');
 // const  cartRouter =  require('./routes/cartItemRoute');
 // const orderRouter =  require('./routes/orderRoute')
 
-app.use('/api/nhif/v1/user', userRouter);
+app.use('/api/v1/user', userRouter);
 // app.use('/api/v1/products', productRouter);
 // app.use('/api/v1/bakeries',bakeryRouter )
 // // app.use('/api/v1/posts',fileUploadRouter );
