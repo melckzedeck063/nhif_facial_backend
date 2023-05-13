@@ -14,6 +14,18 @@ const userSchema = mongoose.Schema({
         required : [true, 'Please provide your name'],
         trim : true
     },
+   gender : { 
+         type : String,
+        default : "Not set"
+    },
+   dob: { 
+         type : String,
+        default : "Not set"
+    },
+   nation: { 
+         type : String,
+        default : "Tanzania"
+    },
     email : {
         type : String,
         required : [true, 'Please provide your email'],
