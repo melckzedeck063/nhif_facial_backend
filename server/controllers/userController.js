@@ -49,14 +49,12 @@ exports.getUser = catchAsync( async (req, res, next) => {
 
 
 exports.getMe = catchAsync ( async (req,res,next) => {
-    // console.log(req.user.id)
-    const logedUser = await User.findById(req.user.id);
-
-    if(!logedUser) {
-        return next(new AppError("No user found with that ID", 404))
+    const user =  await User.findById(req.user.id);
+    if(!user) {
+        return next(new AppError('Error user not found', 401));
     }
 
-    sendResponse(logedUser, "user found", res, 200)
+    sendResponse(user, "user found", res, 200)
 })
 
 

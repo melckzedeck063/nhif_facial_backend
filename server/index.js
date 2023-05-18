@@ -12,35 +12,35 @@ const globalErrorHandler =  require('./controllers/errorController')
 
 dotenv.config({ path: './.env' })
 
-// const multer = require('multer');
+const multer = require('multer');
 // // const upload = multer({ dest: 'uploads/posts' });
 
-// const  multerStorage =  multer.diskStorage({
-//     destination :  (req,file,cb) => {
-//         cb(null,'./uploads/posts')
-//     },
-//     filename : (req,file,cb) => {
-//         console.log(file)
-//         const ext =  file.mimetype.split('/')[1];
-//         const rand =  Math.floor(Math.random() * 1E9);
-//         cb(null, `product-${rand}-${Date.now()}.${ext}`)
-//     }
-// })
+const  multerStorage =  multer.diskStorage({
+    destination :  (req,file,cb) => {
+         cb(null,'./uploads/posts')
+     },
+     filename : (req,file,cb) => {
+         console.log(file)
+         const ext =  file.mimetype.split('/')[1];
+         const rand =  Math.floor(Math.random() * 1E9);
+         cb(null, `product-${rand}-${Date.now()}.${ext}`)
+     }
+ })
 
-// const multerFilter =  (req,file, cb) =>  {
-//     console.log(file)
-//     if(file.mimetype.startsWith('image')){
-//         cb(null,true)
-//     }
-//     else{
-//         cb(new AppError('The  file  you  uploaded is not supported', 400))
-//     }
-// }
+ const multerFilter =  (req,file, cb) =>  {
+     console.log(file)
+     if(file.mimetype.startsWith('image')){
+         cb(null,true)
+     }
+     else{
+         cb(new AppError('The  file  you  uploaded is not supported', 400))
+    }
+ }
 
-// const  upload =  multer({
-//     storage : multerStorage,
-//     fileFilter : multerFilter
-// })
+ const  upload =  multer({
+     storage : multerStorage,
+     fileFilter : multerFilter
+ })
 
 
 const app = express();
@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 //const MongoUrl = `mongodb://localhost:27017/nhif_facial_expression`;
-const  MongoUrl = `mongodb://${process.env.DB_USERNAME}:${process.env.PASSWORD}@cluster0-shard-00-00.xwzd4.mongodb.net:27017,cluster0-shard-00-01.xwzd4.mongodb.net:27017,cluster0-shard-00-02.xwzd4.mongodb.net:27017/nhif_facial_expression?ssl=true&replicaSet=atlas-khbsbw-shard-0&authSource=admin&retryWrites=true&w=majority`
+ const  MongoUrl = `mongodb://${process.env.DB_USERNAME}:${process.env.PASSWORD}@cluster0-shard-00-00.xwzd4.mongodb.net:27017,cluster0-shard-00-01.xwzd4.mongodb.net:27017,cluster0-shard-00-02.xwzd4.mongodb.net:27017/nhif_facial_expression?ssl=true&replicaSet=atlas-khbsbw-shard-0&authSource=admin&retryWrites=true&w=majority`
 
 mongoose.connect(MongoUrl, {
     useUnifiedTopology: true,
