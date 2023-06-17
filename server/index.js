@@ -53,8 +53,8 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan('dev'))
 }
 
-//const MongoUrl = `mongodb://localhost:27017/nhif_facial_expression`;
- const  MongoUrl = `mongodb://${process.env.DB_USERNAME}:${process.env.PASSWORD}@cluster0-shard-00-00.xwzd4.mongodb.net:27017,cluster0-shard-00-01.xwzd4.mongodb.net:27017,cluster0-shard-00-02.xwzd4.mongodb.net:27017/nhif_facial_expression?ssl=true&replicaSet=atlas-khbsbw-shard-0&authSource=admin&retryWrites=true&w=majority`
+const MongoUrl = `mongodb://localhost:27017/nhif_facial_expression`;
+ //const  MongoUrl = `mongodb://${process.env.DB_USERNAME}:${process.env.PASSWORD}@cluster0-shard-00-00.xwzd4.mongodb.net:27017,cluster0-shard-00-01.xwzd4.mongodb.net:27017,cluster0-shard-00-02.xwzd4.mongodb.net:27017/nhif_facial_expression?ssl=true&replicaSet=atlas-khbsbw-shard-0&authSource=admin&retryWrites=true&w=majority`
 
 mongoose.connect(MongoUrl, {
     useUnifiedTopology: true,
@@ -70,36 +70,31 @@ MongoClient.connect(MongoUrl, { useUnifiedTopology: true }, (err, client) => {
 
 const  userRouter = require('./routes/userRoute');
 const  requestRouter =   require('./routes/request_route');
-// const productRouter =   require('./routes/productRoute')
-// const bakeryRouter =  require('./routes/bakeryRoute');
-// // const fileUploadRouter =  require('./routes/fileUpload_router');
-// const  cartRouter =  require('./routes/cartItemRoute');
-// const orderRouter =  require('./routes/orderRoute')
+const dependantRouter = require('./routes/dependant_route')
+const signalRouter =   require('./routes/signal_route');
 
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/request', requestRouter);
-// app.use('/api/v1/products', productRouter);
-// app.use('/api/v1/bakeries',bakeryRouter )
-// // app.use('/api/v1/posts',fileUploadRouter );
-// app.use('/api/v1/cart_items',cartRouter);
-// app.use('/api/v1/orders', orderRouter)
+app.use('/api/v1/dependant', dependantRouter)
+app.use('/api/v1/signal', signalRouter);
 
-// app.post('/api/v1/posts/upload_photo', upload.single('photo'), (req, res) => {
-//     // do something with the photo
-//     console.log(req.file)
-//     const path =  req.file.path;
-//     if(!path || path === undefined){
-//         console.log("something went wrong")
-//     }
 
-//     res.status(201).json({
-//         status : "successfull",
-//         message : "photo uploaded succesfully",
-//         data : path
-//     })
-//   });
+app.post('/api/v1/posts/upload_photo', upload.single('photo'), (req, res) => {
+    // do something with the photo
+    console.log(req.file)
+    const path =  req.file.path;
+    if(!path || path === undefined){
+        console.log("something went wrong")
+    }
 
-// app.use('/uploads', express.static('uploads'));
+    res.status(201).json({
+        status : "successfull",
+        message : "photo uploaded succesfully",
+        data : path
+    })
+  });
+
+app.use('/uploads', express.static('uploads'));
 
 app.use(globalErrorHandler);
 
