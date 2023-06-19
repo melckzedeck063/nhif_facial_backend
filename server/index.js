@@ -102,6 +102,8 @@ app.use(globalErrorHandler);
 
 const port = process.env.PORT || 4001;
 
+app.get('/',(req,res)=> res.send(`App is running from port : ${port}`));
+
 app.listen(port, () => {
     console.log(`Server running from port ${port}`)
 })
