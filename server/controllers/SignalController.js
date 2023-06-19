@@ -4,7 +4,7 @@ const AppError =  require('../utils/AppError');
 const Signal =  require('../models/signalModel');
 const Factory  =  require('../controllers/factoryController')
 const fs = require('fs')
-const filePath = '../../data.json'
+const filePath = './data.json'
 
 
 exports.createSignal = catchAsync ( async (req,res,next) => {
@@ -43,7 +43,7 @@ exports.createSignal = catchAsync ( async (req,res,next) => {
     }
     
     exports.readFileData  =  (req,res) =>  {
-    const  data =     fs.readFile(filePath, 'utf8', (error, data) => {
+    const  data =     fs.readFile('../../data.json', 'utf8', (error, data) => {
             if (error) {
               console.error('An error occurred:', error);
             } 
