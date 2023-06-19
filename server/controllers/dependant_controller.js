@@ -5,7 +5,22 @@
 
    const Factory =  require('../controllers/factoryController')
 
-   exports.registerDependant = Factory.createOne(Dependant);
+   exports.registerDependant = catchAsync(  async  (req,res,next)  => {
+    if(!req.body.sponsor) req.body.sponsor =  req.user.id;
+
+    const dependant =  await Dependant.create(req.body);
+    if(!dependant){
+        return  next(new AppError("Request failed",400))
+    }
+
+    res.status(201).json({
+        status : "success",
+        message : "Dependant  registered succesfully",
+        data : {
+            dependant
+        }
+    })
+   })
 
    exports.getAllDependants =  Factory.getAll(Dependant);
 

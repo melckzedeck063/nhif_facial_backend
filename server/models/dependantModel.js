@@ -29,14 +29,13 @@ const DependantSchema =  mongoose.Schema({
          type : String,
         required : true
     },
-    sponsored_by: {
+    sponsor: {
         type :  mongoose.Schema.ObjectId,
         ref : 'User',
         required : [true]
     },
     telephone : {
         type : String,
-        required : [true, "please provide your phone number"],
         minlength : [10, "Please provide a valid phone number"],
         maxlength : [10, "Please provide a valid phone number"]
     },
@@ -45,7 +44,7 @@ const DependantSchema =  mongoose.Schema({
 
 DependantSchema.pre(/^find/ , function(next) {
     this.populate({
-        path  : 'sponsord_by',
+        path  : 'sponsor',
         select  : '-password -role  -__v'
     })
 

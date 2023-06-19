@@ -21,10 +21,17 @@ const RequestSchema =   mongoose.Schema({
         type : String,
         default  : "Pending"
     },
-    card_no : {
-        type : String,
-        default : "XXXX"
-    },
+    card_no: {
+        type: String,
+        default: function () {
+          // Generate 10 random numbers
+          const randomNumbers = Array.from({ length: 10 }, () =>
+            Math.floor(Math.random() * 10).toString()
+          );
+          return randomNumbers.join('');
+        },
+      },
+    
     photo :  String,
     user: {
         type :  mongoose.Schema.ObjectId,

@@ -23,13 +23,8 @@ const sendResponse =  (statusCode, data, res,message)  => {
 }
 
 exports.newRequest =  catchAsync(  async (req,res,next) => {
-    const new_request  =   await Request.create({
-        check_no  :  req.body.check_no,
-        nida_no : req.body.nida_no,
-        marital_status : req.body.marital_status,
-        user :  req.user.id,
-        date_submitted : req.body.date_submitted
-    });
+    if(!req.body.user) req.body.user =  req.user.id
+    const new_request  =   await Request.create(req.body)
 
     if(!new_request){
         return next(new  AppError('request failed  please try again', 400))
