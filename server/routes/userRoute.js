@@ -15,7 +15,7 @@ router.get('/all_staffs', userController.getAllStaffs);
 router.get('/me', userController.getMe);
 router.get('/user/:id', userController.getUser);
 router.patch('/update_user/:id', userController.updateUser);
-outer.patch('/update/me', userController.updateMe);
+router.patch('/update/me', userController.updateMe);
 // router.get('/user_exist/:id', userController.checkUserExistance);
 
 module.exports =  router;
