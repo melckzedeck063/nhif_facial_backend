@@ -5,6 +5,14 @@ const {User}=  require('../models/userModel');
 const { async } = require('rxjs');
 
 
+const filterObj =  (obj, ...allowedFileds) => {
+    const newObj =  {};
+    Object.keys(obj).forEach(el => {
+        if(allowedFileds.includes(el)) newObj[el] =  obj[el];
+    });
+    return newObj;
+}
+
 const sendResponse =  (data, message, res, statusCode)  => {
     res.status(statusCode).json({
         status  :  "successfull",
