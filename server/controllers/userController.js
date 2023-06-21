@@ -57,6 +57,33 @@ exports.getMe = catchAsync ( async (req,res,next) => {
     sendResponse(user, "user found", res, 200)
 })
 
+exports.updateMe = catchAsync( async(req,res,next) => {
+
+    // CREATE ERROR IF USER IS TRYING TO UPDATE PASSWORD
+    if(req.body.password || req.body.confirmPassword){
+        return next(new AppError('This pass is not for password update please try /updatePassword', 400));
+    }
+
+    //FILTER OUT UNWANTED FIELDS THAT ARE NOT SUPPOSED TO BE UPDATED
+    const filteredBody =  filterObj(req.body, 'firstname', 'surname', 'lastname', 'gender', 'email', 'telephone', 'address', 'dob');
+
+    const updateUser =  await User.findByIdAndUpdate(req.user.id, filteredBody, {
+        new : true,
+        runValidators : true
+    })
+
+    if(!updateUser){
+        return next(new AppError('No document found with that ID', 404));
+    }
+
+    res.status(201).json({
+        status : 'Success', 
+        data : {
+            updateUser
+        }
+    })
+
+})
 
 exports.updateUser =   catchAsync(async  (req,res,next) =>  {
     const currentUser =  await User.findByIdAndUpdate(req.params.id, req.body,{
