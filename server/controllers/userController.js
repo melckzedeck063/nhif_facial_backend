@@ -28,7 +28,7 @@ exports.getAllUsers = catchAsync( async (req, res, next)  =>  {
 })
 
 exports.getAllStaffs =  catchAsync(async(req,res,next) => {
-     const all_staffs =  await User.find({role : { $in: ["admin", "staff"] }});
+     const all_staffs =  await User.find();
      if(!all_staffs){
         return next(new AppError("No staff found in this document", 404));
      }
@@ -70,3 +70,4 @@ exports.updateUser =   catchAsync(async  (req,res,next) =>  {
 
     sendResponse(currentUser, "data succesfull updated", res, 201)
 })
+

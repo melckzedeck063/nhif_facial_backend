@@ -53,3 +53,13 @@ exports.getAllRequests =  catchAsync(  async(req,res,next)  =>  {
 
     sendResponse(200, requests, res, "Data found succesfully");
 })
+
+exports.checkUserExistance = catchAsync( async (req,res,next) => {
+    const  user =  await Request.find({photo_id : req.params.id})
+
+    if(!user){
+        return  next (new AppError("No user found with that photoID",404))
+    }
+
+    sendResponse(200,user,res, "Dat found successfully")
+})

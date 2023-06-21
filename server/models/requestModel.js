@@ -32,7 +32,8 @@ const RequestSchema =   mongoose.Schema({
         },
       },
     
-    photo :  String,
+    photo_id :  String,
+    username : String,
     user: {
         type :  mongoose.Schema.ObjectId,
         ref : 'User',

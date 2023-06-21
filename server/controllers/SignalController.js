@@ -2,7 +2,9 @@ const catchAsync =  require('../utils/catchAsync');
 const AppError =  require('../utils/AppError');
 
 const Signal =  require('../models/signalModel');
-const Factory  =  require('../controllers/factoryController')
+const Verify =  require('../models/verifyModel')
+const Factory  =  require('../controllers/factoryController');
+
 const fs = require('fs')
 const filePath = './data.json'
 
@@ -21,42 +23,11 @@ exports.createSignal = catchAsync ( async (req,res,next) => {
     })
 })
 
+exports.verifyUser = Factory.createOne(Verify)
 
-
-    exports.verifyUser = (req,res) =>  {
-        const data = JSON.stringify(req.body);
-      
-      fs.writeFile(filePath, data, (error) => {
-        if (error) {
-          console.error('An error occurred:', error);
-          res.status(500).send('An error occurred while saving the data.');
-        } else {
-            res.status(201).json({
-                status : 'success',
-                data : {
-                    data
-                }
-            })
-          console.log('Data has been saved to data.json');
-        }
-      });
-    }
+exports.readSignal =  Factory.getAll(Verify)
     
-    exports.readFileData  =  (req,res) =>  {
-    const  data =     fs.readFile('../../data.json', 'utf8', (error, data) => {
-            if (error) {
-              console.error('An error occurred:', error);
-            } 
-            const results =  JSON.parse(data)
-            res.status(200).json({
-                status : "success",
-                data : {
-                    results
-                }
-            })  
-          });
-    }
-exports.readSignal = Factory.getAll(Signal)
+// exports.readSignal = Factory.getAll(Signal)
 
 exports.getCurrentSignal = Factory.getAll(Signal)
 

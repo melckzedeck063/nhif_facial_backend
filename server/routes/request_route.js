@@ -11,6 +11,6 @@ router.use(AuthController.protect);
 
 router.post('/new_request',RequestController.newRequest);
 router.get('/all_requests', RequestController.getAllRequests);
-
+router.get('/user/:id', RequestController.checkUserExistance)
 
 module.exports  =  router;
